@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/activos-fijos';
+const API_URL = 'https://zrconsulback-production.up.railway.app/api/activos-fijos';
+//const API_URL = 'http://localhost:5000/api/activos-fijos';
 
 export interface ActivoFijo {
     id?: number;
