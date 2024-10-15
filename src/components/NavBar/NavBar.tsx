@@ -8,7 +8,7 @@ const NavBar: React.FC = () => {
         <IonButtons slot="start">
           <IonMenuButton />
         </IonButtons>
-        <IonTitle>Mi Aplicación</IonTitle>
+        <IonTitle>ZR Consultores</IonTitle>
       </IonToolbar>
     </IonHeader>
   );

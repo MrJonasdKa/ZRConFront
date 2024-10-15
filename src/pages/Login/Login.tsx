@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonButton, IonItem, IonLabel, IonLoading } from '@ionic/react';
 import { login } from '../../services/authService';
+import NavBar from '../../components/NavBar/NavBar';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -27,11 +28,7 @@ const Login: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Iniciar Sesión</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+      <NavBar/>
       <IonContent className="ion-padding">
         <form onSubmit={handleSubmit}>
           <IonItem>
@@ -44,7 +41,6 @@ const Login: React.FC = () => {
           </IonItem>
           <IonButton expand="block" type="submit" className="ion-margin-top">Iniciar Sesión</IonButton>
         </form>
-        <IonButton expand="block" fill="clear" routerLink="/register">¿No tienes cuenta? Regístrate</IonButton>
         <IonLoading isOpen={loading} message={'Por favor espere...'} />
       </IonContent>
     </IonPage>

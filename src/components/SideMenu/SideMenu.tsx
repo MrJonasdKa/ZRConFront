@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { IonMenu, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonIcon, IonLabel } from '@ionic/react';
-import { add, homeOutline, informationCircleOutline, logIn, logOut } from 'ionicons/icons';
+import { add, bookOutline, homeOutline, informationCircleOutline, logIn, logOut } from 'ionicons/icons';
 import { isAuthenticated, logout } from '../../services/authService';
 import { useHistory } from 'react-router-dom';
 
@@ -52,18 +52,26 @@ const SideMenu: React.FC = () => {
             <IonIcon icon={informationCircleOutline} slot="start" />
             <IonLabel>Acerca de</IonLabel>
           </IonItem>
+          {authenticated && (
+            <IonItem routerLink="/activos">
+              <IonIcon icon={bookOutline} slot="start" />
+              <IonLabel>Activos Fijos</IonLabel>
+            </IonItem>
+          )}
           {authenticated ? (
             <IonItem onClick={handleLogout}>
               <IonIcon icon={logOut} slot="start" />
               <IonLabel>Cerrar sesión</IonLabel>
             </IonItem>
           ) : (
-            <IonItem routerLink="/login">
-              <IonIcon icon={logIn} slot="start" />
-              <IonLabel>Iniciar sesión</IonLabel>
-            </IonItem>
+            <>
+              <IonItem routerLink="/login">
+                <IonIcon icon={logIn} slot="start" />
+                <IonLabel>Iniciar sesión</IonLabel>
+              </IonItem>
+            </>
           )}
-          {!authenticated && (
+          {authenticated && (
             <IonItem routerLink="/register">
               <IonIcon icon={add} slot="start" />
               <IonLabel>Registrarse</IonLabel>

@@ -1,20 +1,23 @@
 import React, { useState } from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonButton, IonItem, IonLabel, IonLoading } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonButton, IonItem, IonLabel, IonLoading, IonSelect, IonSelectOption } from '@ionic/react';
 import { register } from '../../services/authService';
+import { useHistory } from 'react-router-dom';
 
 const Register: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [role, setRole] = useState('user');
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const result = await register(name, email, password);
+      const result = await register(name, email, password, role);
       console.log('Registration successful', result);
-      // Aquí puedes manejar el éxito del registro, como redirigir al usuario a la página de login
+      history.push('/login');
     } catch (error) {
       console.error('Registration failed', error);
       // Aquí puedes manejar el error, como mostrar un mensaje al usuario
@@ -43,6 +46,13 @@ const Register: React.FC = () => {
           <IonItem>
             <IonLabel position="floating">Contraseña</IonLabel>
             <IonInput type="password" value={password} onIonChange={e => setPassword(e.detail.value!)} required />
+          </IonItem>
+          <IonItem>
+            <IonLabel>Rol</IonLabel>
+            <IonSelect value={role} onIonChange={e => setRole(e.detail.value)}>
+              <IonSelectOption value="user">Usuario</IonSelectOption>
+              <IonSelectOption value="admin">Administrador</IonSelectOption>
+            </IonSelect>
           </IonItem>
           <IonButton expand="block" type="submit" className="ion-margin-top">Registrarse</IonButton>
         </form>
